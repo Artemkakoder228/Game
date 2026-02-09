@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Space Shooter</title>
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <link rel="stylesheet" href="game.css">
+</head>
+<body>
+
+    <div id="ui">💰 Очки: <span id="score">0</span></div>
+    
+    <div id="gameover">
+        <h1>ГРУ ЗАВЕРШЕНО</h1>
+        <p>Ваш результат: <span id="final-score">0</span></p>
+        <button onclick="sendScore()">📥 ЗАБРАТИ НАГОРОДУ</button>
+        <br><br>
+        <button class="restart-btn" onclick="location.reload()">🔄 Зіграти ще</button>
+    </div>
+
+    <canvas id="game"></canvas>
+
+    <script src="game.js"></script>
+</body>
+</html>
