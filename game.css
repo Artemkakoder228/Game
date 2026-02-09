@@ -1,64 +1,67 @@
-/* Основні налаштування сторінки */
 body { 
     margin: 0; 
-    overflow: hidden; /* Забороняємо прокрутку */
+    overflow: hidden; /* Забороняємо скрол */
     background: #000; 
     color: white; 
     font-family: sans-serif; 
-    touch-action: none; /* Вимикаємо стандартні жести браузера */
+    
+    /* ВАЖЛИВО ДЛЯ ТЕЛЕФОНІВ: */
+    touch-action: none; /* Вимикаємо стандартні жести */
+    overscroll-behavior: none; /* Вимикаємо ефект "гумки" при прокрутці */
+    user-select: none; /* Забороняємо виділяти текст пальцем */
+    -webkit-user-select: none; /* Для iPhone */
 }
 
-/* Полотно гри */
 canvas { 
     display: block; 
+    touch-action: none;
 }
 
-/* Рахунок зліва зверху */
 #ui { 
     position: absolute; 
-    top: 10px; 
-    left: 10px; 
-    font-size: 20px; 
+    top: 15px; /* Трохи нижче, щоб не перекривати "чубчик" телефону */
+    left: 15px; 
+    font-size: 24px; /* Більший шрифт для телефону */
     z-index: 10; 
     font-weight: bold; 
     text-shadow: 0 0 5px #000;
+    pointer-events: none; /* Щоб не заважав натискати */
 }
 
-/* Вікно Game Over */
 #gameover { 
-    display: none; /* Приховано за замовчуванням */
+    display: none; 
     position: absolute; 
     top: 50%; 
     left: 50%; 
     transform: translate(-50%, -50%); 
     text-align: center; 
-    background: rgba(0, 0, 0, 0.85); 
+    background: rgba(0, 0, 0, 0.9); 
     padding: 30px; 
-    border-radius: 15px; 
-    border: 2px solid #00ffcc;
-    box-shadow: 0 0 20px rgba(0, 255, 204, 0.3);
-    min-width: 200px;
+    border-radius: 20px; 
+    border: 3px solid #00ffcc;
+    box-shadow: 0 0 30px rgba(0, 255, 204, 0.4);
+    min-width: 250px;
+    z-index: 20;
 }
 
-/* Кнопки */
 button {
     background: #00ffcc; 
     border: none; 
-    padding: 12px 24px; 
-    font-size: 18px; 
-    border-radius: 8px; 
+    padding: 15px 30px; /* Більші кнопки для пальців */
+    font-size: 20px; 
+    border-radius: 12px; 
     cursor: pointer; 
-    margin-top: 10px;
+    margin-top: 15px;
     font-weight: bold;
     color: #000;
-    transition: transform 0.1s;
+    width: 100%; /* Кнопка на всю ширину */
 }
 
 button:active {
     transform: scale(0.95);
+    background: #00cca3;
 }
 
-/* Червона кнопка рестарту */
 .restart-btn {
     background: #ff4444; 
     color: white;
