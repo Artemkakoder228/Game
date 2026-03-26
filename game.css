@@ -1,15 +1,13 @@
 body { 
     margin: 0; 
-    overflow: hidden; /* Забороняємо скрол */
-    background: #000; 
+    overflow: hidden; 
+    background: #050510; /* Глибший космічний колір */
     color: white; 
-    font-family: sans-serif; 
-    
-    /* ВАЖЛИВО ДЛЯ ТЕЛЕФОНІВ: */
-    touch-action: none; /* Вимикаємо стандартні жести */
-    overscroll-behavior: none; /* Вимикаємо ефект "гумки" при прокрутці */
-    user-select: none; /* Забороняємо виділяти текст пальцем */
-    -webkit-user-select: none; /* Для iPhone */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+    touch-action: none; 
+    overscroll-behavior: none; 
+    user-select: none; 
+    -webkit-user-select: none; 
 }
 
 canvas { 
@@ -19,15 +17,18 @@ canvas {
 
 #ui { 
     position: absolute; 
-    top: 15px; /* Трохи нижче, щоб не перекривати "чубчик" телефону */
-    left: 15px; 
-    font-size: 24px; /* Більший шрифт для телефону */
+    top: 20px; 
+    left: 20px; 
+    font-size: 20px; 
     z-index: 10; 
-    font-weight: bold; 
-    text-shadow: 0 0 5px #000;
-    pointer-events: none; /* Щоб не заважав натискати */
+    font-weight: 800; 
+    letter-spacing: 1px;
+    color: #00ffcc;
+    text-shadow: 0 0 10px rgba(0, 255, 204, 0.5);
+    pointer-events: none; 
 }
 
+/* Вікно завершення гри (Ефект матового скла) */
 #gameover { 
     display: none; 
     position: absolute; 
@@ -35,34 +36,95 @@ canvas {
     left: 50%; 
     transform: translate(-50%, -50%); 
     text-align: center; 
-    background: rgba(0, 0, 0, 0.9); 
-    padding: 30px; 
-    border-radius: 20px; 
-    border: 3px solid #00ffcc;
-    box-shadow: 0 0 30px rgba(0, 255, 204, 0.4);
-    min-width: 250px;
+    
+    /* Скло */
+    background: rgba(10, 15, 30, 0.75); 
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    
+    padding: 40px 30px; 
+    border-radius: 24px; 
+    border: 1px solid rgba(0, 255, 204, 0.3);
+    box-shadow: 0 20px 50px rgba(0,0,0,0.8), 0 0 30px rgba(0, 255, 204, 0.15);
+    min-width: 280px;
     z-index: 20;
 }
 
+#gameover h1 {
+    margin-top: 0;
+    font-size: 32px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: #fff;
+    text-shadow: 0 0 15px #00ffcc; /* Неонове світіння тексту */
+}
+
+#gameover p {
+    font-size: 20px;
+    color: #ccc;
+    margin-bottom: 30px;
+}
+
+#final-score {
+    font-size: 32px;
+    font-weight: 900;
+    color: #ffcc00;
+    text-shadow: 0 0 15px rgba(255, 204, 0, 0.6);
+}
+
+/* Базові стилі для всіх кнопок */
 button {
-    background: #00ffcc; 
+    position: relative;
     border: none; 
-    padding: 15px 30px; /* Більші кнопки для пальців */
-    font-size: 20px; 
-    border-radius: 12px; 
+    padding: 18px 32px; 
+    font-size: 18px; 
+    border-radius: 16px; 
     cursor: pointer; 
-    margin-top: 15px;
-    font-weight: bold;
+    margin-top: 10px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    width: 100%; 
+    transition: all 0.3s ease; /* Плавність будь-яких змін */
+}
+
+/* Кнопка "ЗАБРАТИ НАГОРОДУ" (Акцентна) */
+.claim-btn {
+    background: linear-gradient(135deg, #00ffcc, #00b38f); 
     color: #000;
-    width: 100%; /* Кнопка на всю ширину */
+    box-shadow: 0 0 20px rgba(0, 255, 204, 0.4), inset 0 -4px 0 rgba(0,0,0,0.2);
+    animation: pulseGlow 2s infinite; /* Запуск анімації пульсації */
 }
 
-button:active {
-    transform: scale(0.95);
-    background: #00cca3;
+.claim-btn:active {
+    transform: translateY(4px); /* Кнопка провалюється при натисканні */
+    box-shadow: 0 0 10px rgba(0, 255, 204, 0.4), inset 0 0px 0 rgba(0,0,0,0.2);
 }
 
+/* Кнопка "ЗІГРАТИ ЩЕ" (Вторинна) */
 .restart-btn {
-    background: #ff4444; 
-    color: white;
+    background: rgba(255, 255, 255, 0.05); 
+    color: #fff;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.restart-btn:active {
+    transform: translateY(2px);
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.4);
+}
+
+/* Анімація пульсації для головної кнопки */
+@keyframes pulseGlow {
+    0% { 
+        box-shadow: 0 0 15px rgba(0, 255, 204, 0.4), inset 0 -4px 0 rgba(0,0,0,0.2); 
+    }
+    50% { 
+        box-shadow: 0 0 35px rgba(0, 255, 204, 0.9), inset 0 -4px 0 rgba(0,0,0,0.2); 
+        transform: scale(1.03); /* Трохи збільшується */
+    }
+    100% { 
+        box-shadow: 0 0 15px rgba(0, 255, 204, 0.4), inset 0 -4px 0 rgba(0,0,0,0.2); 
+    }
 }
